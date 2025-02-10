@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuralTech | 未来科技实验室</title>
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --cyber-purple: #bc13fe;
+            --matrix-green: #0f0;
+            --dark-bg: #0a0a12;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--dark-bg);
+            font-family: 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+            color: white;
+        }
+
+        /* 粒子背景容器 */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* 光效标题 */
+        .cyber-title {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+            font-size: 4rem;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, 
+                var(--neon-blue), 
+                var(--cyber-purple), 
+                var(--neon-blue));
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        /* 动态卡片 */
+        .tech-card {
+            background: rgba(10, 10, 30, 0.9);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
+        }
+
+        /* 电路板效果 */
+        .circuit-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: 
+                linear-gradient(to right, #00f3ff33 1px, transparent 1px),
+                linear-gradient(to bottom, #00f3ff33 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* 数据流效果 */
+        @keyframes dataFlow {
+            from { background-position: 0 0; }
+            to { background-position: 100% 100%; }
+        }
+
+        /* 响应式布局 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 霓虹按钮 */
+        .neon-btn {
+            padding: 1rem 2rem;
+            background: none;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .neon-btn:hover {
+            background: var(--neon-blue);
+            color: var(--dark-bg);
+            box-shadow: 0 0 30px var(--neon-blue);
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <header class="cyber-title">
+        <span>NEURAL</span>TECH
+    </header>
+
+    <div class="grid">
+        <!-- 科技卡片 -->
+        <div class="tech-card">
+            <div class="circuit-overlay"></div>
+            <h3>孙子计算实验室</h3>
+            <p>探索量子位元的无限可能性...</p>
+            <button class="neon-btn">进入实验室</button>
+        </div>
+
+        <div class="tech-card">
+            <div class="circuit-overlay"></div>
+            <h3>神经网络矩阵</h3>
+            <p>深度学习的下一代架构...</p>
+            <button class="neon-btn">查看详情</button>
+        </div>
+
+        <div class="tech-card">
+            <div class="circuit-overlay"></div>
+            <h3>太空科技中心</h3>
+            <p>星际旅行技术研发...</p>
+            <button class="neon-btn">探索更多</button>
+        </div>
+    </div>
+
+    <!-- 粒子效果库 -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // 初始化粒子背景
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80 },
+                color: { value: '#00f3ff' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5 },
+                size: { value: 3 },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'repulse' },
+                    onclick: { enable: true, mode: 'push' },
+                    resize: true
+                }
+            }
+        });
+
+        // 动态光标效果
+        document.addEventListener('mousemove', (e) => {
+            document.documentElement.style.setProperty('--x', `${e.clientX}px`);
+            document.documentElement.style.setProperty('--y', `${e.clientY}px`);
+        });
+    </script>
+</body>
+</html>
