@@ -12,6 +12,9 @@ import (
 
 // customizeRegister registers customize routers.
 func customizedRegister(r *server.Hertz) {
+	//认证服务url设置
+	// r.GET("/auth",auth)
+
 	r.GET("/ping", handler.Ping)
 	r.GET("/ping1", func(c context.Context, ctx *app.RequestContext) {
 		ctx.String(200, "lalala~")

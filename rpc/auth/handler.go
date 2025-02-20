@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+
 	auth "github.com/nihonge/tiktok/rpc/auth/kitex_gen/auth"
 )
 
@@ -11,6 +12,12 @@ type AuthServiceImpl struct{}
 // DeliverTokenByRPC implements the AuthServiceImpl interface.
 func (s *AuthServiceImpl) DeliverTokenByRPC(ctx context.Context, req *auth.DeliverTokenReq) (resp *auth.DeliveryResp, err error) {
 	// TODO: Your code here...
+	//获取request中的userid
+	userid := req.UserId
+	//生成token
+
+	mytoken := resp.Token
+	//存储token
 	return
 }
 
