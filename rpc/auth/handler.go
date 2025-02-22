@@ -15,9 +15,11 @@ func (s *AuthServiceImpl) DeliverTokenByRPC(ctx context.Context, req *auth.Deliv
 	//获取request中的userid
 	userid := req.UserId
 	//生成token
-
-	mytoken := resp.Token
+	_ = userid
 	//存储token
+	//返回token
+	resp = &auth.DeliveryResp{}
+	resp.Token = "nihonge"
 	return
 }
 

@@ -1,12 +1,16 @@
 package main
 
 import (
-	user "github.com/nihonge/tiktok/rpc/user/kitex_gen/user/userservice"
 	"log"
+	"net"
+
+	"github.com/cloudwego/kitex/server"
+	user "github.com/nihonge/tiktok/rpc/user/kitex_gen/user/userservice"
 )
 
 func main() {
-	svr := user.NewServer(new(UserServiceImpl))
+	addr, _ := net.ResolveTCPAddr("tcp", "127.0.0.1:8891") //设置rpc服务的IP
+	svr := user.NewServer(new(UserServiceImpl), server.WithServiceAddr(addr))
 
 	err := svr.Run()
 
