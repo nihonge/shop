@@ -1,4 +1,4 @@
-# proto生成代码： kitex -I ../../idl -service auth -module github.com/nihonge/tiktok ..\..\idl\user.proto
+# proto生成代码： kitex -I ../../idl -service myauth -module github.com/nihonge/tiktok ../../idl\user.proto
 -I ./idl 表示 kitex 会在 ./idl 目录下查找 auth.proto 和它所导入的任何其他 Proto 文件（如 common.proto）。
 -module github.com/yourusername/yourproject 是指定 Go 模块的路径。
 ./idl/auth.proto 是需要生成代码的 Proto 文件。

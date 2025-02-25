@@ -1,8 +1,8 @@
 syntax="proto3";
 
-package auth;
+package myauth;
 
-option go_package="/auth";
+option go_package="/myauth";
 
 service AuthService {
     rpc DeliverTokenByRPC(DeliverTokenReq) returns (DeliveryResp) {}
