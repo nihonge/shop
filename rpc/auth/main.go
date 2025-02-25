@@ -7,7 +7,7 @@ import (
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/server"
 	etcd "github.com/kitex-contrib/registry-etcd"
-	auth "github.com/nihonge/tiktok/rpc/auth/kitex_gen/auth/authservice"
+	auth "github.com/nihonge/tiktok/rpc/auth/kitex_gen/myauth/authservice"
 )
 
 func main() {

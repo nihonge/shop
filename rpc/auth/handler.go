@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 
-	auth "github.com/nihonge/tiktok/rpc/auth/kitex_gen/auth"
+	auth "github.com/nihonge/tiktok/rpc/auth/kitex_gen/myauth"
 )
 
 // AuthServiceImpl implements the last service interface defined in the IDL.
