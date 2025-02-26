@@ -6,8 +6,8 @@ import (
 
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/kitex/client"
-	"github.com/nihonge/tiktok/rpc/auth/kitex_gen/auth"
-	"github.com/nihonge/tiktok/rpc/auth/kitex_gen/auth/authservice"
+	"github.com/nihonge/tiktok/rpc/auth/kitex_gen/myauth"
+	"github.com/nihonge/tiktok/rpc/auth/kitex_gen/myauth/authservice"
 )
 
 func Auth(ctx context.Context, c *app.RequestContext) {
@@ -15,7 +15,7 @@ func Auth(ctx context.Context, c *app.RequestContext) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	req := auth.DeliverTokenReq{}
+	req := myauth.DeliverTokenReq{}
 	req.UserId = 114514
 	resp, err := cli.DeliverTokenByRPC(ctx, &req)
 	if err != nil {

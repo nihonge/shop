@@ -6,6 +6,7 @@ require (
 	github.com/cloudwego/fastpb v0.0.5
 	github.com/cloudwego/hertz v0.9.1
 	github.com/cloudwego/kitex v0.12.2
+	github.com/kitex-contrib/registry-etcd v0.2.5
 	google.golang.org/protobuf v1.33.0
 )
 
@@ -38,7 +39,6 @@ require (
 	github.com/iancoleman/strcase v0.2.0 // indirect
 	github.com/jhump/protoreflect v1.8.2 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
-	github.com/kitex-contrib/registry-etcd v0.2.5 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.4 // indirect
 	github.com/kr/pretty v0.3.1 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
