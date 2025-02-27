@@ -28,6 +28,4 @@ func customizedRegister(r *server.Hertz) {
 			ctx.String(200, "fuckyou2")
 		})
 	}
-	// your code ...
-	r.StaticFile("/", "./pages/index.html")
 }
