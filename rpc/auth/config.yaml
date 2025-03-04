@@ -1,0 +1,3 @@
+jwt:
+  secret:"123456"
+  expire_duration:24h

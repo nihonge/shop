@@ -8,7 +8,8 @@ import (
 )
 
 // AuthServiceImpl implements the last service interface defined in the IDL.
-type AuthServiceImpl struct{}
+type AuthServiceImpl struct {
+}
 
 // DeliverTokenByRPC implements the AuthServiceImpl interface.
 func (s *AuthServiceImpl) DeliverTokenByRPC(ctx context.Context, req *auth.DeliverTokenReq) (resp *auth.DeliveryResp, err error) {
