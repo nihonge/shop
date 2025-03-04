@@ -10,7 +10,7 @@ import (
 
 var (
 	ExpireDuration time.Duration // Token 过期时间
-	SerectKey      string
+	SignKey        string
 )
 
 // 自定义 Claims 结构（扩展标准 Claims）
@@ -27,11 +27,12 @@ func init() {
 		fmt.Println("读取配置文件失败")
 	}
 	ExpireDuration = viper.GetDuration("jwt.expire_duration")
-	SerectKey = viper.GetString("jwt.secret")
+	SignKey = viper.GetString("jwt.secret")
+	fmt.Println("SignKey:", SignKey)
 }
 
 // GenerateToken 生成 JWT Token
-func (s *AuthServiceImpl) GenerateToken(userID int64) (string, error) {
+func GenerateToken(userID int64) (string, error) {
 	// 1. 创建 Claims
 	claims := CustomClaims{
 		UserID: userID,
@@ -41,12 +42,12 @@ func (s *AuthServiceImpl) GenerateToken(userID int64) (string, error) {
 			Issuer:    "your_service_name",                                // 签发者标识
 		},
 	}
-
+	fmt.Println("有效时间：", int(ExpireDuration.Seconds()))
 	// 2. 使用 HS256 算法生成 Token
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 	// 3. 使用密钥签名
-	signedToken, err := token.SignedString([]byte(SerectKey))
+	signedToken, err := token.SignedString([]byte(SignKey))
 	if err != nil {
 		return "", fmt.Errorf("签名失败: %w", err)
 	}
@@ -55,7 +56,7 @@ func (s *AuthServiceImpl) GenerateToken(userID int64) (string, error) {
 }
 
 // VerifyToken 验证 JWT Token 并返回 Claims
-func (s *AuthServiceImpl) VerifyToken(tokenString string) (*CustomClaims, error) {
+func VerifyToken(tokenString string) (*CustomClaims, error) {
 	// 1. 解析 Token（自动验证签名和过期时间）
 	token, err := jwt.ParseWithClaims(
 		tokenString,
@@ -65,25 +66,17 @@ func (s *AuthServiceImpl) VerifyToken(tokenString string) (*CustomClaims, error)
 			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 				return nil, fmt.Errorf("不支持的签名算法: %v", token.Header["alg"])
 			}
-			return []byte(s.jwtConfig.SecretKey), nil
+			return []byte(SignKey), nil
 		},
 	)
 
 	// 2. 处理解析错误
 	if err != nil {
-		if ve, ok := err.(*jwt.ValidationError); ok {
-			switch {
-			case ve.Errors&jwt.ValidationErrorMalformed != 0:
-				return nil, fmt.Errorf("非法 Token 格式")
-			case ve.Errors&jwt.ValidationErrorExpired != 0:
-				return nil, fmt.Errorf("Token 已过期")
-			case ve.Errors&jwt.ValidationErrorNotValidYet != 0:
-				return nil, fmt.Errorf("Token 未生效")
-			default:
-				return nil, fmt.Errorf("Token 验证失败: %v", ve)
-			}
-		}
 		return nil, fmt.Errorf("无法解析 Token: %v", err)
+	}
+
+	if !token.Valid {
+		return nil, fmt.Errorf("Token 无效")
 	}
 
 	// 3. 提取 Claims
