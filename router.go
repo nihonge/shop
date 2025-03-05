@@ -3,9 +3,6 @@
 package main
 
 import (
-	"context"
-
-	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/app/server"
 	"github.com/nihonge/tiktok/biz/handler"
 )
@@ -16,17 +13,9 @@ func customizedRegister(r *server.Hertz) {
 	r.POST("/auth/token", handler.AuthToken)
 	r.POST("/auth/verify", handler.AuthVerify)
 
+	r.POST("/user/register", handler.AuthVerify)
+	r.POST("/user/login", handler.AuthVerify)
+
 	r.GET("/ping", handler.Ping)
-	r.GET("/ping1", func(c context.Context, ctx *app.RequestContext) {
-		ctx.String(200, "lalala~")
-	})
-	v1 := r.Group("/1")
-	{
-		v1.GET("/1", func(c context.Context, ctx *app.RequestContext) {
-			ctx.String(200, "wdnmd1")
-		})
-		v1.GET("/2", func(c context.Context, ctx *app.RequestContext) {
-			ctx.String(200, "fuckyou2")
-		})
-	}
+
 }
