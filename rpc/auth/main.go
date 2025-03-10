@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net"
+	"os"
 
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/server"
@@ -17,7 +18,12 @@ func main() {
 		log.Println(err)
 		return
 	}
-	addr, _ := net.ResolveTCPAddr("tcp", "127.0.0.1:8890") //设置rpc服务的IP
+	// 从环境变量获取端口，默认值 8890
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8890"
+	}
+	addr, _ := net.ResolveTCPAddr("tcp", "127.0.0.1:"+port) //设置rpc服务的IP
 	svr := auth.NewServer(new(AuthServiceImpl),
 		server.WithServiceAddr(addr),
 		server.WithRegistry(r),
